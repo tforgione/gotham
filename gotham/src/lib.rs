@@ -12,6 +12,7 @@
 // See Rust issue #34537 <https://github.com/rust-lang/rust/issues/34537>
 #![deny(private_in_public)]
 
+extern crate colored;
 extern crate base64;
 extern crate bincode;
 extern crate borrow_bag;

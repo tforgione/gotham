@@ -259,6 +259,44 @@ impl Node {
 
         None
     }
+
+    /// Pretty-prints the node and its children with indentation.
+    pub fn render_ascii(&self) {
+        self.render_ascii_with_offset("".to_owned(), true);
+    }
+
+    /// Pretty-prints the node and its children with identation that starts with the offset
+    /// parameter.
+    fn render_ascii_with_offset(&self, offset: String, last_child: bool) {
+        let delimiter1 = if offset == "" {
+            "─"
+        } else if last_child {
+            "└"
+        } else {
+            "├"
+        };
+
+        let delimiter2 = if self.children.len() > 0 { "─┬" } else { "──" };
+
+        use colored::*;
+        print!("{}{}{} ", offset, delimiter1, delimiter2);
+
+        if self.is_routable() {
+            println!("{}", self.segment.bold());
+        } else {
+            println!("{}", self.segment);
+        }
+
+        let offset = if last_child {
+            offset + "  "
+        } else {
+            offset + "│ "
+        };
+
+        for (index, node) in self.children.iter().enumerate() {
+            node.render_ascii_with_offset(offset.clone(), index == &self.children.len() - 1);
+        }
+    }
 }
 
 impl Eq for Node {}

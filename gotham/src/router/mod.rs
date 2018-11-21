@@ -192,6 +192,11 @@ impl Router {
 
         Box::new(f)
     }
+
+    /// Pretty prints the tree of routes on the terminal.
+    pub fn render_ascii(&self) {
+        self.data.tree.render_ascii()
+    }
 }
 
 #[cfg(test)]

@@ -70,8 +70,10 @@ fn router() -> Router {
 /// Start a server and use a `Router` to dispatch requests
 pub fn main() {
     let addr = "127.0.0.1:7878";
+    let router = router();
     println!("Listening for requests at http://{}", addr);
-    gotham::start(addr, router())
+    router.render_ascii();
+    gotham::start(addr, router)
 }
 
 #[cfg(test)]

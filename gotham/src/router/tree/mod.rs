@@ -59,6 +59,11 @@ impl Tree {
         trace!(" starting tree traversal");
         self.root.match_node(req_path_segments)
     }
+
+    /// Pretty prints the tree of routes on the terminal.
+    pub fn render_ascii(&self) {
+        self.root.render_ascii()
+    }
 }
 
 #[cfg(test)]
